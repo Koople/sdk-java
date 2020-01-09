@@ -18,6 +18,13 @@ allprojects {
 
 ext.libraries = [:]
 
+// Add dependencies to "libraries.internal" that are not exposed in our public API. These
+// will be completely omitted from the "thin" jar, and will be embedded with shaded names
+// in the other two SDK jars.
+libraries.internal = [
+        "com.google.guava:guava:28.1-jre"
+]
+
 // Add dependencies to "libraries.external" that are exposed in our public API, or that have
 // global state that must be shared between the SDK and the caller.
 libraries.external = [
@@ -34,9 +41,18 @@ libraries.test = [
 ]
 
 dependencies {
+    implementation libraries.internal
     compileClasspath libraries.external
-    runtime libraries.external
-    testImplementation libraries.test
+    runtime libraries.external, libraries.internal
+    testImplementation libraries.test, libraries.internal
+}
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        showStandardStreams = true
+        exceptionFormat = 'full'
+    }
 }
 
 
