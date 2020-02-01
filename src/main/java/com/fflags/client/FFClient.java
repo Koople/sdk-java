@@ -8,7 +8,7 @@ public class FFClient implements AutoCloseable {
     private final String sdkKey;
     private final FFlagsConfig config;
 
-    public FFClient(String sdkKey) {
+    public FFClient(String sdkKey) throws NotValidSdkKeyException {
         checkNotNull(sdkKey, "Sdk key must not be null");
         config = new FFlagsConfig();
         checkNotNull(config, "Invalid configuration");
@@ -16,12 +16,15 @@ public class FFClient implements AutoCloseable {
         this.sdkKey = sdkKey;
     }
 
-    private boolean isValid(String sdkKey) {
-        return false;
+    private void isValid(String sdkKey) throws NotValidSdkKeyException {
+        throw new NotValidSdkKeyException();
     }
 
     @Override
     public void close() throws IOException {
         System.out.println("Closing!");
+    }
+
+    class NotValidSdkKeyException extends Throwable {
     }
 }
