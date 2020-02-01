@@ -1,11 +1,10 @@
 package com.fflags.client;
 
-import java.io.Closeable;
 import java.io.IOException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class FFClient implements Closeable {
+public class FFClient implements AutoCloseable {
     private final String sdkKey;
 
     public FFClient(String sdkKey) {
@@ -15,6 +14,6 @@ public class FFClient implements Closeable {
 
     @Override
     public void close() throws IOException {
-        throw new IOException();
+        System.out.println("Closing!");
     }
 }
