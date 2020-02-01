@@ -19,6 +19,16 @@ public class FFlagsClientTest extends EasyMockSupport {
         }
     }
 
+//    @Test
+//    public void should_return_config_object_with_filled_properties() {
+//        FFlagsConfig config = new FFlagsConfig();
+//        String serverURL = config.appProps.getProperty("fflags.server.url");
+//        String serverPort = config.appProps.getProperty("fflags.server.port");
+//
+//        assertNotNull(serverURL);
+//        assertNotNull(serverPort);
+//    }
+
     @Test
     public void should_return_a_validate_client_when_key_is_correct() {
         try(FFClient ffClient = new FFClient("validKey")) {
