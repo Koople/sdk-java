@@ -1,8 +1,8 @@
 package com.fflags.client;
 
 import com.fflags.client.exceptions.NotValidSdkKeyException;
+import org.easymock.EasyMock;
 import org.easymock.EasyMockSupport;
-import org.easymock.Mock;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -11,9 +11,6 @@ import static org.junit.Assert.*;
 
 
 public class FFlagsClientTest extends EasyMockSupport {
-
-    @Mock
-    private FFClient client;
 
     @Test
     public void should_throws_exception_when_sdk_key_is_null() {
@@ -36,13 +33,29 @@ public class FFlagsClientTest extends EasyMockSupport {
     }
 
     @Test
-    public void should_throw_NotValidSdkKeyException_with_invalid_key() {
-        FFClient client = new FFClient("invalid_key");
+    public void should_throw_NotValidSdkKeyException_when_init_with_invalid_key() {
+            FFClient client = new FFClient("invalid_key");
         try {
             client.init();
-            fail("expected not valid SdkKey exception");
+            EasyMock.expectLastCall().andThrow(new NotValidSdkKeyException());
+            fail("expected NotValidSdkKeyException");
         } catch (NotValidSdkKeyException e) {
             assertEquals("Invalid SdkKey", e.getMessage());
+        }
+    }
+
+    @Test
+    public void should_return_valid_result_when_init_with_valid_key() {
+        FFClient client = partialMockBuilder(FFClient.class)
+                .withConstructor("valid_key")
+                .addMockedMethod("init")
+                .createMock();
+
+        try {
+            client.init();
+            assertNotNull(client);
+        } catch (NotValidSdkKeyException e) {
+            fail("exception non expected");
         }
     }
 }

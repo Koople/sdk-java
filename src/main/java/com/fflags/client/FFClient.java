@@ -17,11 +17,6 @@ public class FFClient implements AutoCloseable {
         this.httpClient = new FFHttpClient();
     }
 
-    @Override
-    public void close() throws IOException {
-        System.out.println("Closing!");
-    }
-
     public void init() {
         try {
             URL initURL = this.config.init();
@@ -34,5 +29,10 @@ public class FFClient implements AutoCloseable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void close() throws IOException {
+        System.out.println("Closing!");
     }
 }
