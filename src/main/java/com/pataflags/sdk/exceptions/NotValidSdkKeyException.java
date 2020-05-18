@@ -1,4 +1,4 @@
-package com.fflags.client.exceptions;
+package com.pataflags.sdk.exceptions;
 
 public class NotValidSdkKeyException extends RuntimeException {
     public NotValidSdkKeyException() {

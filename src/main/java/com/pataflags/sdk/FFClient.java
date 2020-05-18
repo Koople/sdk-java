@@ -1,4 +1,4 @@
-package com.fflags.client;
+package com.pataflags.sdk;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

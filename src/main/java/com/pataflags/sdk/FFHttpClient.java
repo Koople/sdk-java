@@ -1,6 +1,6 @@
-package com.fflags.client;
+package com.pataflags.sdk;
 
-import com.fflags.client.exceptions.NotValidSdkKeyException;
+import com.pataflags.sdk.exceptions.NotValidSdkKeyException;
 
 import java.io.BufferedReader;
 import java.io.IOException;

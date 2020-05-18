@@ -1,6 +1,6 @@
-package com.fflags.client;
+package com.pataflags.sdk;
 
-import com.fflags.client.exceptions.NotValidSdkKeyException;
+import com.pataflags.sdk.exceptions.NotValidSdkKeyException;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockSupport;
 import org.junit.Test;
@@ -8,7 +8,6 @@ import org.junit.Test;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
-
 
 public class FFlagsClientTest extends EasyMockSupport {
 
