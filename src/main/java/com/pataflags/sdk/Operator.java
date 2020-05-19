@@ -10,31 +10,31 @@ enum Operator {
     contains {
         @Override
         boolean evaluate(Value value, Value userValue) {
-            return value.contains(userValue);
+            return userValue.contains(value);
         }
     },
     greaterThan {
         @Override
         boolean evaluate(Value value, Value userValue) {
-            return value.greaterThan(userValue);
+            return userValue.greaterThan(value);
         }
     },
     greaterThanOrEquals {
         @Override
         boolean evaluate(Value value, Value userValue) {
-            return value.greaterThanOrEquals(userValue);
+            return userValue.greaterThanOrEquals(value);
         }
     },
     lessThan {
         @Override
         boolean evaluate(Value value, Value userValue) {
-            return value.lessThan(userValue);
+            return userValue.lessThan(value);
         }
     },
     lessThanOrEquals {
         @Override
         boolean evaluate(Value value, Value userValue) {
-            return value.lessThanOrEquals(userValue);
+            return userValue.lessThanOrEquals(value);
         }
     };
 
