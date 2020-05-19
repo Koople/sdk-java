@@ -1,10 +1,13 @@
 package com.pataflags.sdk;
 
+import com.pataflags.evaluator.Evaluator;
+import com.pataflags.evaluator.Feature;
+import com.pataflags.evaluator.User;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,11 +49,6 @@ public class PFClient implements AutoCloseable {
     }
 
     public Map<String, Boolean> evaluate(User user) {
-        HashMap<String, Boolean> evaluation = new HashMap<>();
-
-        for (Feature feature: features)
-            evaluation.put(feature.key, feature.evaluate(user));
-
-        return evaluation;
+        return new Evaluator(features).evaluate(user);
     }
 }

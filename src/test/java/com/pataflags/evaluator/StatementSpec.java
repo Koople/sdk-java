@@ -1,7 +1,5 @@
-package com.pataflags.sdk;
+package com.pataflags.evaluator;
 
-import com.pataflags.sdk.values.IntValue;
-import com.pataflags.sdk.values.StringValue;
 import org.easymock.EasyMockSupport;
 import org.junit.Test;
 

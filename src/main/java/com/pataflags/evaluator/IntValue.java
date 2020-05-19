@@ -1,6 +1,4 @@
-package com.pataflags.sdk.values;
-
-import com.pataflags.sdk.Value;
+package com.pataflags.evaluator;
 
 public class IntValue extends Value<Integer> {
     public IntValue(Integer value) {

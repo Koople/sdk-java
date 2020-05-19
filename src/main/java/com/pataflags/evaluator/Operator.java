@@ -1,6 +1,6 @@
-package com.pataflags.sdk;
+package com.pataflags.evaluator;
 
-enum Operator {
+public enum Operator {
     equals {
         @Override
         public boolean evaluate(Value value, Value userValue) {

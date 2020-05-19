@@ -1,4 +1,4 @@
-package com.pataflags.sdk;
+package com.pataflags.evaluator;
 
 public abstract class Value<T> {
     protected final T value;

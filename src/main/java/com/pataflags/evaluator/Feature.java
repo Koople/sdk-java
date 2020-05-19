@@ -1,4 +1,4 @@
-package com.pataflags.sdk;
+package com.pataflags.evaluator;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,6 @@
-package com.pataflags.sdk;
+package com.pataflags.evaluator;
 
 import java.util.List;
-import java.util.Map;
 
 public class Rule {
     private final List<Statement> statements;

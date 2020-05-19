@@ -1,5 +1,6 @@
 package com.pataflags.sdk;
 
+import com.pataflags.evaluator.Feature;
 import com.pataflags.sdk.exceptions.NotValidSdkKeyException;
 
 import java.io.BufferedReader;
