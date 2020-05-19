@@ -7,6 +7,13 @@ public abstract class Value<T> {
         this.value = value;
     }
 
+    public boolean equals(Value other) {
+        if (getClass().equals(other.getClass()))
+            return value.equals(other.value);
+
+        return false;
+    }
+
     public boolean contains(Value other) {
         return false;
     }
