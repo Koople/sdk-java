@@ -7,13 +7,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FFHttpClient {
 
     public FFHttpClient() {
     }
 
-    public void post(URL initURL) throws IOException {
+    public List<Feature> post(URL initURL) throws IOException {
         HttpURLConnection con = (HttpURLConnection) initURL.openConnection();
         con.setRequestMethod("POST");
         con.setConnectTimeout(5000);
@@ -30,6 +32,8 @@ public class FFHttpClient {
         in.close();
 
         con.disconnect();
+
+        return new ArrayList<>();
     }
 
     private void checkResponseStatus(int status) {
