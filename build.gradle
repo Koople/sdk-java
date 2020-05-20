@@ -1,4 +1,7 @@
-apply plugin: 'java'
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
 
 configurations.all {
     // check for updates every build for dependencies with: 'changing: true'
@@ -6,6 +9,7 @@ configurations.all {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -29,7 +33,8 @@ libraries.internal = [
 // global state that must be shared between the SDK and the caller.
 libraries.external = [
         "com.google.code.gson:gson:2.7",
-        "org.slf4j:slf4j-api:1.7.21"
+        "org.slf4j:slf4j-api:1.7.21",
+        "com.fflags.evaluator:evaluator:1.0-SNAPSHOT"
 ]
 
 // Add dependencies to "libraries.test" that are used only in unit tests.
