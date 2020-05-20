@@ -26,15 +26,15 @@ ext.libraries = [:]
 // will be completely omitted from the "thin" jar, and will be embedded with shaded names
 // in the other two SDK jars.
 libraries.internal = [
-        "com.google.guava:guava:28.1-jre"
+        "com.google.guava:guava:28.1-jre",
+        "com.pataflags:evaluator:1.0-SNAPSHOT"
 ]
 
 // Add dependencies to "libraries.external" that are exposed in our public API, or that have
 // global state that must be shared between the SDK and the caller.
 libraries.external = [
         "com.google.code.gson:gson:2.7",
-        "org.slf4j:slf4j-api:1.7.21",
-        "com.pataflags:evaluator:1.0-SNAPSHOT"
+        "org.slf4j:slf4j-api:1.7.21"
 ]
 
 // Add dependencies to "libraries.test" that are used only in unit tests.
