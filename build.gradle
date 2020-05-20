@@ -34,7 +34,7 @@ libraries.internal = [
 libraries.external = [
         "com.google.code.gson:gson:2.7",
         "org.slf4j:slf4j-api:1.7.21",
-        "com.fflags.evaluator:evaluator:1.0-SNAPSHOT"
+        "com.pataflags:evaluator:1.0-SNAPSHOT"
 ]
 
 // Add dependencies to "libraries.test" that are used only in unit tests.
