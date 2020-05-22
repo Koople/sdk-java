@@ -13,6 +13,11 @@ import java.util.List;
 
 public class FFHttpClient {
 
+//    val mapper: ObjectMapper = jacksonObjectMapper()
+//        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+//        .registerModule(JavaTimeModule())
+//            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+
     public FFHttpClient() {
     }
 
@@ -31,6 +36,8 @@ public class FFHttpClient {
             content.append(inputLine);
         }
         in.close();
+
+//        mapper.readValue(json)
 
         con.disconnect();
 
