@@ -1,5 +1,6 @@
 package com.pataflags.sdk;
 
+import com.pataflags.evaluator.Evaluation;
 import com.pataflags.evaluator.Evaluator;
 import com.pataflags.evaluator.Feature;
 import com.pataflags.evaluator.User;
@@ -49,7 +50,7 @@ public class PFClient implements AutoCloseable {
         System.out.println("Closing!");
     }
 
-    public Map<String, Boolean> evaluate(User user) {
+    public Evaluation evaluate(User user) {
         return new Evaluator(features).evaluate(user);
     }
 }

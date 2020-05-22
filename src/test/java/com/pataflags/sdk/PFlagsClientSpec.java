@@ -21,39 +21,39 @@ import static org.junit.Assert.*;
 public class PFlagsClientSpec extends EasyMockSupport {
 
     Segment spainAdults = new Segment(new ArrayList<Rule>() {{
-        add(new Rule(new ArrayList<Statement>(){{
-            add(new Statement("country", Operator.equals, new ArrayList<Value<?>>() {{
+        add(new Rule(0, new ArrayList<Statement>(){{
+            add(new Statement("country", Operator.EQUALS, new ArrayList<Value>() {{
                 add(new StringValue("spain"));
             }}));
-            add(new Statement("age", Operator.greaterThanOrEquals, new ArrayList<Value<?>>() {{
+            add(new Statement("age", Operator.GREATER_THAN_OR_EQUALS, new ArrayList<Value>() {{
                 add(new IntValue(18));
             }}));
         }}));
     }});
 
     Segment eeuuAdults = new Segment(new ArrayList<Rule>() {{
-        add(new Rule(new ArrayList<Statement>(){{
-            add(new Statement("country", Operator.equals, new ArrayList<Value<?>>() {{
+        add(new Rule(0, new ArrayList<Statement>(){{
+            add(new Statement("country", Operator.EQUALS, new ArrayList<Value>() {{
                 add(new StringValue("eeuu"));
             }}));
-            add(new Statement("age", Operator.greaterThanOrEquals, new ArrayList<Value<?>>() {{
+            add(new Statement("age", Operator.GREATER_THAN_OR_EQUALS, new ArrayList<Value>() {{
                 add(new IntValue(21));
             }}));
         }}));
     }});
 
-    User user = new User("pedrito", new HashMap<String, Value<?>>() {{
+    User user = new User("pedrito", new HashMap<String, Value>() {{
         put("country", new StringValue("spain"));
         put("age", new IntValue(18));
     }});
 
     private List<Feature> features = new ArrayList<Feature>() {{
-        add(new Feature("disabledForAll", FeatureTargeting.disabled));
-        add(new Feature("enabledForHimself", FeatureTargeting.segment, new ArrayList<String>() {{ add("pedrito"); }}, new ArrayList<Segment>()));
-        add(new Feature("enabledForOther", FeatureTargeting.segment, new ArrayList<String>() {{ add("paco"); }}, new ArrayList<Segment>()));
-        add(new Feature("enabledForSpainAdults", FeatureTargeting.segment, new ArrayList<String>(), new ArrayList<Segment>() {{ add(spainAdults); }}));
-        add(new Feature("enabledForEeuuAdults", FeatureTargeting.segment, new ArrayList<String>(), new ArrayList<Segment>() {{ add(eeuuAdults); }}));
-        add(new Feature("enabledForAll", FeatureTargeting.all));
+        add(new Feature("disabledForAll", FeatureTargeting.DISABLED_FOR_ALL));
+        add(new Feature("enabledForHimself", FeatureTargeting.ENABLED_FOR_SOME_USERS, new ArrayList<String>() {{ add("pedrito"); }}, new ArrayList<Segment>()));
+        add(new Feature("enabledForOther", FeatureTargeting.ENABLED_FOR_SOME_USERS, new ArrayList<String>() {{ add("paco"); }}, new ArrayList<Segment>()));
+        add(new Feature("enabledForSpainAdults", FeatureTargeting.ENABLED_FOR_SOME_USERS, new ArrayList<String>(), new ArrayList<Segment>() {{ add(spainAdults); }}));
+        add(new Feature("enabledForEeuuAdults", FeatureTargeting.ENABLED_FOR_SOME_USERS, new ArrayList<String>(), new ArrayList<Segment>() {{ add(eeuuAdults); }}));
+        add(new Feature("enabledForAll", FeatureTargeting.ENABLED_FOR_ALL));
     }};
 
     @Test
@@ -115,9 +115,9 @@ public class PFlagsClientSpec extends EasyMockSupport {
 
         PFClient client = new PFClient("apiKey", mockHttpClient);
         client.init();
-        Map<String, Boolean> evaluation = client.evaluate(user);
+        Evaluation evaluation = client.evaluate(user);
 
-        assertEquals(evaluation, new HashMap<String, Boolean>() {{
+        assertEquals(evaluation.evaluatedFeatures, new HashMap<String, Boolean>() {{
             put("disabledForAll", false);
             put("enabledForHimself", true);
             put("enabledForOther", false);
