@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -22,29 +21,29 @@ public class PFlagsClientSpec extends EasyMockSupport {
 
     Segment spainAdults = new Segment(new ArrayList<Rule>() {{
         add(new Rule(0, new ArrayList<Statement>(){{
-            add(new Statement("country", Operator.EQUALS, new ArrayList<Value>() {{
+            add(new Statement.ANY("country", Operator.EQUALS, new ArrayList<Value>() {{
                 add(new StringValue("spain"));
             }}));
-            add(new Statement("age", Operator.GREATER_THAN_OR_EQUALS, new ArrayList<Value>() {{
-                add(new IntValue(18));
+            add(new Statement.NUMBER("age", Operator.GREATER_THAN_OR_EQUALS, new ArrayList<NumberValue>() {{
+                add(new NumberValue(18));
             }}));
         }}));
     }});
 
     Segment eeuuAdults = new Segment(new ArrayList<Rule>() {{
         add(new Rule(0, new ArrayList<Statement>(){{
-            add(new Statement("country", Operator.EQUALS, new ArrayList<Value>() {{
+            add(new Statement.ANY("country", Operator.EQUALS, new ArrayList<Value>() {{
                 add(new StringValue("eeuu"));
             }}));
-            add(new Statement("age", Operator.GREATER_THAN_OR_EQUALS, new ArrayList<Value>() {{
-                add(new IntValue(21));
+            add(new Statement.NUMBER("age", Operator.GREATER_THAN_OR_EQUALS, new ArrayList<NumberValue>() {{
+                add(new NumberValue(21));
             }}));
         }}));
     }});
 
     User user = new User("pedrito", new HashMap<String, Value>() {{
         put("country", new StringValue("spain"));
-        put("age", new IntValue(18));
+        put("age", new NumberValue(18));
     }});
 
     private List<Feature> features = new ArrayList<Feature>() {{
