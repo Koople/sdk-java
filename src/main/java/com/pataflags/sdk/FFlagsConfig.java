@@ -24,8 +24,8 @@ class FFlagsConfig {
     URL init() throws MalformedURLException {
         String protocol = "http";
         String host = "localhost";
-        int port = 8080;
-        String initURL = "/api/v1/proxy/init?apiKey=".concat(this.sdkKey);
+        int port = 8081;
+        String initURL = "/proxy/server/initialize";
 
         return new URL(protocol, host, port, initURL);
     }

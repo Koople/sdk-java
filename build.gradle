@@ -16,8 +16,8 @@ repositories {
 allprojects {
     group = 'com.fflags'
     version = "${version}"
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 }
 
 ext.libraries = [:]
@@ -33,7 +33,7 @@ libraries.internal = [
 // Add dependencies to "libraries.external" that are exposed in our public API, or that have
 // global state that must be shared between the SDK and the caller.
 libraries.external = [
-        "com.google.code.gson:gson:2.7",
+        "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8",
         "org.slf4j:slf4j-api:1.7.21"
 ]
 

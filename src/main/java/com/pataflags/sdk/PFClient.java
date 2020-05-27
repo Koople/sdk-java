@@ -1,24 +1,22 @@
 package com.pataflags.sdk;
 
-import com.pataflags.evaluator.Evaluation;
-import com.pataflags.evaluator.Evaluator;
-import com.pataflags.evaluator.Feature;
-import com.pataflags.evaluator.User;
+import com.pataflags.evaluator.*;
 
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PFClient implements AutoCloseable {
     private final FFlagsConfig config;
+    private String apiKey;
     private FFHttpClient httpClient;
+    private Store<Segment> store;
     private List<Feature> features;
 
     public PFClient(String apiKey) {
@@ -27,15 +25,20 @@ public class PFClient implements AutoCloseable {
 
     PFClient(String apiKey, FFHttpClient httpClient) {
         checkNotNull(apiKey, "Sdk key must not be null");
+        this.apiKey = apiKey;
         this.config = new FFlagsConfig(apiKey);
         this.httpClient = httpClient;
+        this.store = new InMemoryStore(new ArrayList<Segment>());
     }
 
     public void init() {
         try {
             URL initURL = this.config.init();
-            this.features = httpClient.post(initURL);
-
+            ServerInitializeResponseDTO dto = httpClient.get(initURL, apiKey);
+            this.features = dto.features;
+            for (Segment segment : dto.segments) {
+                this.store.upsert(segment.key, segment);
+            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {
@@ -51,6 +54,6 @@ public class PFClient implements AutoCloseable {
     }
 
     public Evaluation evaluate(User user) {
-        return new Evaluator(features).evaluate(user);
+        return new Evaluator(features).evaluate(store, user);
     }
 }
