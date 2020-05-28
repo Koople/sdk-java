@@ -1,7 +1,7 @@
 package com.pataflags.sdk;
 
-import com.pataflags.evaluator.Evaluation;
-import com.pataflags.evaluator.User;
+import com.pataflags.evaluator.PFEvaluation;
+import com.pataflags.evaluator.PFUser;
 import com.pataflags.sdk.exceptions.NotValidSdkKeyException;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRunner;
@@ -127,12 +127,12 @@ public class PFlagsClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate() throws IOException {
-        User user = User.create("test", new User.Attribute("age", 18));
+        PFUser user = PFUser.create("test", new PFUser.Attribute("age", 18));
         PFClient client = new PFClient("a90dfb46-73f0-4d1b-aaa3-b98f03ddc2c1", new FFHttpClient());
 
         client.init();
 
-        Evaluation evaluation = client.evaluate(user);
+        PFEvaluation evaluation = client.evaluate(user);
 
         assertEquals(evaluation.evaluatedFeatures, new HashMap<String, Boolean>() {{
             put("disabled-for-all", false);

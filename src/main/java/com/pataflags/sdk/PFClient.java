@@ -2,7 +2,6 @@ package com.pataflags.sdk;
 
 import com.pataflags.evaluator.*;
 
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
@@ -16,8 +15,8 @@ public class PFClient implements AutoCloseable {
     private final FFlagsConfig config;
     private String apiKey;
     private FFHttpClient httpClient;
-    private Store<Segment> store;
-    private List<Feature> features;
+    private PFStore<PFSegment> store;
+    private List<PFFeatureFlag> features;
 
     public PFClient(String apiKey) {
         this(apiKey, new FFHttpClient());
@@ -28,7 +27,7 @@ public class PFClient implements AutoCloseable {
         this.apiKey = apiKey;
         this.config = new FFlagsConfig(apiKey);
         this.httpClient = httpClient;
-        this.store = new InMemoryStore(new ArrayList<Segment>());
+        this.store = new PFInMemoryStore(new ArrayList<>());
     }
 
     public void init() {
@@ -36,7 +35,7 @@ public class PFClient implements AutoCloseable {
             URL initURL = this.config.init();
             ServerInitializeResponseDTO dto = httpClient.get(initURL, apiKey);
             this.features = dto.features;
-            for (Segment segment : dto.segments) {
+            for (PFSegment segment : dto.segments) {
                 this.store.upsert(segment.key, segment);
             }
         } catch (MalformedURLException e) {
@@ -53,7 +52,7 @@ public class PFClient implements AutoCloseable {
         System.out.println("Closing!");
     }
 
-    public Evaluation evaluate(User user) {
-        return new Evaluator(features).evaluate(store, user);
+    public PFEvaluation evaluate(PFUser user) {
+        return new PFEvaluator(features).evaluate(store, user);
     }
 }
