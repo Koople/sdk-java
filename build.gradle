@@ -27,7 +27,7 @@ ext.libraries = [:]
 // in the other two SDK jars.
 libraries.internal = [
         "com.google.guava:guava:28.1-jre",
-        "com.pataflags:evaluator:1.0-SNAPSHOT"
+        "com.pataflags:evaluator:0.0.2-SNAPSHOT"
 ]
 
 // Add dependencies to "libraries.external" that are exposed in our public API, or that have

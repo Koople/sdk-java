@@ -1,6 +1,7 @@
 package com.pataflags.sdk;
 
-import com.pataflags.evaluator.*;
+import com.pataflags.evaluator.Evaluation;
+import com.pataflags.evaluator.User;
 import com.pataflags.sdk.exceptions.NotValidSdkKeyException;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRunner;
@@ -8,13 +9,9 @@ import org.easymock.EasyMockSupport;
 import org.easymock.Mock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import sun.tools.jstat.Operator;
 
 import java.io.IOException;
-import java.net.http.HttpClient;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -130,20 +127,18 @@ public class PFlagsClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate() throws IOException {
-        User user = User.create("test");
-        PFClient client = new PFClient("2133d3a1-d008-4817-9a03-c7c1c1fe07e4", new FFHttpClient());
+        User user = User.create("test", new User.Attribute("age", 18));
+        PFClient client = new PFClient("a90dfb46-73f0-4d1b-aaa3-b98f03ddc2c1", new FFHttpClient());
 
         client.init();
 
         Evaluation evaluation = client.evaluate(user);
 
         assertEquals(evaluation.evaluatedFeatures, new HashMap<String, Boolean>() {{
-            put("disabledForAll", false);
-            put("enabledForHimself", true);
-            put("enabledForOther", false);
-            put("enabledForSpainAdults", true);
-            put("enabledForEeuuAdults", false);
-            put("enabledForAll", true);
+            put("disabled-for-all", false);
+            put("enabled-for-himself", true);
+            put("enabled-for-adults", true);
+            put("enabled-for-all", true);
         }});
     }
 }
