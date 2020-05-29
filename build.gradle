@@ -1,63 +1,27 @@
 plugins {
     id 'java'
+    id 'maven'
     id 'maven-publish'
 }
 
-configurations.all {
-    // check for updates every build for dependencies with: 'changing: true'
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-}
+group 'com.pataflags'
+version '0.0.3-SNAPSHOT'
+
+sourceCompatibility = 1.8
 
 repositories {
     mavenLocal()
     mavenCentral()
 }
 
-allprojects {
-    group = 'com.fflags'
-    version = "${version}"
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-}
-
-ext.libraries = [:]
-
-// Add dependencies to "libraries.internal" that are not exposed in our public API. These
-// will be completely omitted from the "thin" jar, and will be embedded with shaded names
-// in the other two SDK jars.
-libraries.internal = [
-        "com.google.guava:guava:28.1-jre",
-        "com.pataflags:evaluator:0.0.2-SNAPSHOT"
-]
-
-// Add dependencies to "libraries.external" that are exposed in our public API, or that have
-// global state that must be shared between the SDK and the caller.
-libraries.external = [
-        "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8",
-        "org.slf4j:slf4j-api:1.7.21"
-]
-
-// Add dependencies to "libraries.test" that are used only in unit tests.
-libraries.test = [
-        "com.squareup.okhttp3:mockwebserver:4.3.0",
-        "org.easymock:easymock:4.1",
-        "junit:junit:4.13",
-        "ch.qos.logback:logback-classic:1.2.3"
-]
-
 dependencies {
-    implementation libraries.internal
-    compileClasspath libraries.external
-    runtime libraries.external, libraries.internal
-    testImplementation libraries.test, libraries.internal
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile "org.easymock:easymock:4.1"
+
+    compile "com.google.guava:guava:28.1-jre"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
+
+    implementation "com.pataflags:evaluator:0.0.3-SNAPSHOT"
 }
 
-test {
-    testLogging {
-        events "passed", "skipped", "failed", "standardOut", "standardError"
-        showStandardStreams = true
-        exceptionFormat = 'full'
-    }
-}
-
-
+install.dependsOn ':build'

@@ -128,7 +128,7 @@ public class PFlagsClientSpec extends EasyMockSupport {
     @Test
     public void should_evaluate() throws IOException {
         PFUser user = PFUser.create("test", new PFUser.Attribute("age", 18));
-        PFClient client = new PFClient("a90dfb46-73f0-4d1b-aaa3-b98f03ddc2c1", new FFHttpClient());
+        PFClient client = new PFClient("0678397a-9dac-4c3e-97a7-eae604f44813", new FFHttpClient());
 
         client.init();
 

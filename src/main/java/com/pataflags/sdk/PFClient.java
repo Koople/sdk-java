@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -15,8 +13,7 @@ public class PFClient implements AutoCloseable {
     private final FFlagsConfig config;
     private String apiKey;
     private FFHttpClient httpClient;
-    private PFStore<PFSegment> store;
-    private List<PFFeatureFlag> features;
+    private PFStore store;
 
     public PFClient(String apiKey) {
         this(apiKey, new FFHttpClient());
@@ -27,17 +24,13 @@ public class PFClient implements AutoCloseable {
         this.apiKey = apiKey;
         this.config = new FFlagsConfig(apiKey);
         this.httpClient = httpClient;
-        this.store = new PFInMemoryStore(new ArrayList<>());
     }
 
     public void init() {
         try {
             URL initURL = this.config.init();
             ServerInitializeResponseDTO dto = httpClient.get(initURL, apiKey);
-            this.features = dto.features;
-            for (PFSegment segment : dto.segments) {
-                this.store.upsert(segment.key, segment);
-            }
+            this.store = new PFInMemoryStore(dto.features, dto.segments);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {
@@ -53,6 +46,6 @@ public class PFClient implements AutoCloseable {
     }
 
     public PFEvaluation evaluate(PFUser user) {
-        return new PFEvaluator(features).evaluate(store, user);
+        return new PFEvaluator(this.store).evaluate(user);
     }
 }
