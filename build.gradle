@@ -21,7 +21,7 @@ dependencies {
     compile "com.google.guava:guava:28.1-jre"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
 
-    implementation "com.pataflags:evaluator:0.0.3-SNAPSHOT"
+    implementation "com.pataflags:evaluator:0.0.5-SNAPSHOT"
 }
 
 install.dependsOn ':build'
