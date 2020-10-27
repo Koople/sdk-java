@@ -1,5 +1,8 @@
 package com.pataflags.sdk;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
@@ -10,12 +13,10 @@ import java.net.URL;
 
 public class FFHttpClient {
 
-//    ObjectMapper mapper = jacksonObjectMapper()
-//        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-////        .registerModule(JavaTimeModule())
-//        .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-
-    ObjectMapper mapper = new ObjectMapper();
+    ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+            .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+            .setVisibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.NONE)
+            .setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE);
 
     public FFHttpClient() {
     }
@@ -28,7 +29,7 @@ public class FFHttpClient {
         con.setRequestProperty("x-api-key", apiKey);
 
         try {
-            int status = con.getResponseCode();
+            con.getResponseCode();
         } catch (Throwable ex) {
             System.out.println(ex.getMessage());
         }
@@ -41,8 +42,6 @@ public class FFHttpClient {
             content.append(inputLine);
         }
         in.close();
-
-//        Object object = mapper.read.readValue<Object>(content)
 
         ServerInitializeResponseDTO dto = mapper.readValue(content.toString(), ServerInitializeResponseDTO.class);
 

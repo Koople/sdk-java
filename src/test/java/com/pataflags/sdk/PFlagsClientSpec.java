@@ -75,8 +75,15 @@ public class PFlagsClientSpec extends EasyMockSupport {
     }
 
     @Test
-    public void should_throw_NotValidSdkKeyException_when_init_with_invalid_key() {
-        PFClient client = new PFClient("invalid_key");
+    public void should_throw_NotValidSdkKeyException_when_init_with_invalid_key() throws IOException {
+        FFlagsConfig config =  new FFlagsConfig("invalid_key");
+        FFHttpClient httpClient = EasyMock.createMock(FFHttpClient.class);
+
+        EasyMock.expect(httpClient.get(config.init(), "invalid_key")).andThrow(new NotValidSdkKeyException());
+
+        EasyMock.replay(httpClient);
+        PFClient client = new PFClient("invalid_key", httpClient);
+
         try {
             client.init();
             EasyMock.expectLastCall().andThrow(new NotValidSdkKeyException());
@@ -127,14 +134,14 @@ public class PFlagsClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate() throws IOException {
-        PFUser user = PFUser.create("test", new PFUser.Attribute("age", 18));
-        PFClient client = new PFClient("0678397a-9dac-4c3e-97a7-eae604f44813", new FFHttpClient());
+        PFUser user = PFUser.create("test", new PFUser.Attribute("username", "davsertor"));
+        PFClient client = new PFClient("4e1f34d7-f45c-4642-90a4-e84d84f55242", new FFHttpClient());
 
         client.init();
 
         PFEvaluation evaluation = client.evaluate(user);
-
-        assertEquals(evaluation.evaluatedFeatures, new HashMap<String, Boolean>() {{
+        //{remote-config=true, documentation=false, landing-page-awesome-feature=false, metrics=false}
+        assertEquals(evaluation.features, new HashMap<String, Boolean>() {{
             put("disabled-for-all", false);
             put("enabled-for-himself", true);
             put("enabled-for-adults", true);

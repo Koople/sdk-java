@@ -1,6 +1,7 @@
 package com.pataflags.sdk;
 
 import com.pataflags.evaluator.*;
+import com.pataflags.evaluator.stores.PFInMemoryStore;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -30,7 +31,7 @@ public class PFClient implements AutoCloseable {
         try {
             URL initURL = this.config.init();
             ServerInitializeResponseDTO dto = httpClient.get(initURL, apiKey);
-            this.store = new PFInMemoryStore(dto.features, dto.segments);
+            this.store = new PFInMemoryStore(dto.features, dto.remoteConfigs, dto.segments);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (ProtocolException e) {
