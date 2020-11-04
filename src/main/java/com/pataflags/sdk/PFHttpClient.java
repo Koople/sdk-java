@@ -11,14 +11,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class FFHttpClient {
+public class PFHttpClient {
 
     ObjectMapper mapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
             .setVisibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.NONE)
             .setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE);
 
-    public FFHttpClient() {
+    public PFHttpClient() {
     }
 
     public ServerInitializeResponseDTO get(URL initURL, String apiKey) throws IOException {

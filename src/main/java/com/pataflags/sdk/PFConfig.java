@@ -5,12 +5,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
-class FFlagsConfig {
+class PFConfig {
     String sdkKey;
     String propertiesFile;
     Properties configProps;
 
-    FFlagsConfig(String sdkKey) {
+    PFConfig(String sdkKey) {
         this.sdkKey = sdkKey;
         this.propertiesFile = "application.properties";
         this.configProps = new Properties();
@@ -22,10 +22,10 @@ class FFlagsConfig {
     }
 
     URL init() throws MalformedURLException {
-        String protocol = "http";
-        String host = "localhost";
-        int port = 8080;
-        String initURL = "/proxy/server/initialize";
+        String protocol = this.configProps.getProperty("fflags.server.protocol");
+        String host = this.configProps.getProperty("fflags.server.host");
+        int port = Integer.parseInt(this.configProps.getProperty("fflags.server.port"));
+        String initURL = this.configProps.getProperty("fflags.server.endpoint");
 
         return new URL(protocol, host, port, initURL);
     }
