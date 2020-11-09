@@ -42,12 +42,12 @@ public class PFClient implements AutoCloseable {
         return clientService.IsEnabled(feature, PFUser.anonymous());
     }
 
-    public String valueOf(String remoteConfig, PFUser user) {
-        return valueOf(remoteConfig, user, "");
-    }
-
     public String valueOf(String remoteConfig) {
         return clientService.valueOf(remoteConfig, PFUser.anonymous(), "");
+    }
+
+    public String valueOf(String remoteConfig, PFUser user) {
+        return valueOf(remoteConfig, user, "");
     }
 
     public String valueOf(String remoteConfig, String defaultValue) {
