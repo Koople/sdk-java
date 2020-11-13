@@ -1,11 +1,11 @@
 plugins {
-    id 'java'
+    id 'java-library'
     id 'maven'
     id 'maven-publish'
 }
 
 group 'com.pataflags'
-version '0.0.3-SNAPSHOT'
+version '0.0.4-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
@@ -14,14 +14,22 @@ repositories {
     mavenCentral()
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'fflags-sdk'
+            from components.java
+        }
+    }
+}
+
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     testCompile "org.easymock:easymock:4.1"
 
     compile "com.google.guava:guava:28.1-jre"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
-
-    implementation "com.pataflags:evaluator:0.0.5-SNAPSHOT"
+    compile files('evaluator/fflags-evaluator-0.0.5.jar')
 }
 
 install.dependsOn ':build'
