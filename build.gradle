@@ -17,7 +17,7 @@ repositories {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = 'fflags-sdk'
+            artifactId = 'server-sdk'
             from components.java
         }
     }
