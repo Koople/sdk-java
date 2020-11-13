@@ -27,6 +27,7 @@ build:
 
 test:
   stage: test
+  needs: ["build"]
   script:
     - ./gradlew check
 
