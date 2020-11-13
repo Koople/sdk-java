@@ -15,6 +15,7 @@ cache:
 
 build:
   stage: build
+  when: manual
   script:
     - ./gradlew assemble
   artifacts:
