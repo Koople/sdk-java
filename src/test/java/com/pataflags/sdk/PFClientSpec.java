@@ -53,7 +53,7 @@ public class PFClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate() throws IOException {
-        PFUser user = PFUser.create("test").with("username", "ldavid.gomez");
+        PFUser user = PFUser.create("test.user").with("username", "test user");
         PFClient client = PFClient.initialize(API_KEY);
 
         PFEvaluation evaluation = client.evaluate(user);
@@ -67,7 +67,7 @@ public class PFClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_is_enabled() throws IOException {
-        PFUser user = PFUser.create("test").with("username", "ldavid.gomez");
+        PFUser user = PFUser.create("test.user").with("username", "test user");
         PFClient client = PFClient.initialize(API_KEY);
 
         Boolean isEnabled = client.isEnabled("developer", user);
@@ -76,7 +76,7 @@ public class PFClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_is_not_enabled_for_non_existing_feature() throws IOException {
-        PFUser user = PFUser.create("test").with("username", "ldavid.gomez");
+        PFUser user = PFUser.create("test.user").with("username", "test user");
         PFClient client = PFClient.initialize(API_KEY);
 
         Boolean isEnabled = client.isEnabled("non_valid_feature", user);
@@ -161,7 +161,7 @@ public class PFClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_value_of_with_specific_user_and_no_default_value() throws IOException {
-        PFUser user = PFUser.create("username").with("username", "ldavid.gomez");
+        PFUser user = PFUser.create("test.user").with("username", "test user");
         PFClient client = PFClient.initialize(API_KEY);
 
         String remoteConfig = client.valueOf("remote-config-for-user", user);
@@ -170,7 +170,7 @@ public class PFClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_value_of_with_specific_user_and_default_value() throws IOException {
-        PFUser user = PFUser.create("username").with("username", "non_valid_user");
+        PFUser user = PFUser.create("test.user").with("username", "non_valid_user");
         PFClient client = PFClient.initialize(API_KEY);
 
         String remoteConfig = client.valueOf("remote-config-for-user", user);
