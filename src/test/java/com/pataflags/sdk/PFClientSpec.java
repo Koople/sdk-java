@@ -2,6 +2,7 @@ package com.pataflags.sdk;
 
 import com.pataflags.evaluator.PFEvaluation;
 import com.pataflags.evaluator.PFUser;
+import com.pataflags.evaluator.PFUserAttribute;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRunner;
 import org.easymock.EasyMockSupport;
@@ -12,7 +13,6 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -78,8 +78,8 @@ public class PFClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_is_enabled_attribute_list() throws IOException {
-        ArrayList<PFUser.Attribute> attributes = new ArrayList<PFUser.Attribute>() {{
-            add(new PFUser.Attribute("username", "test user"));
+        ArrayList<PFUserAttribute> attributes = new ArrayList<PFUserAttribute>() {{
+            add(new PFUserAttribute("username", "test user"));
         }};
         PFUser user = PFUser.create("test.user", attributes);
         PFClient client = PFClient.initialize(API_KEY);
