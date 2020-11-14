@@ -10,7 +10,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -68,6 +70,18 @@ public class PFClientSpec extends EasyMockSupport {
     @Test
     public void should_evaluate_is_enabled() throws IOException {
         PFUser user = PFUser.create("test.user").with("username", "test user");
+        PFClient client = PFClient.initialize(API_KEY);
+
+        Boolean isEnabled = client.isEnabled("developer", user);
+        Assert.assertTrue(isEnabled);
+    }
+
+    @Test
+    public void should_evaluate_is_enabled_attribute_list() throws IOException {
+        ArrayList<PFUser.Attribute> attributes = new ArrayList<PFUser.Attribute>() {{
+            add(new PFUser.Attribute("username", "test user"));
+        }};
+        PFUser user = PFUser.create("test.user", attributes);
         PFClient client = PFClient.initialize(API_KEY);
 
         Boolean isEnabled = client.isEnabled("developer", user);
