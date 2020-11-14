@@ -75,7 +75,7 @@ public class PFClientSpec extends EasyMockSupport {
     }
 
     @Test
-    public void should_evaluate_is_not_enabled_for_unexisting_feature() throws IOException {
+    public void should_evaluate_is_not_enabled_for_non_existing_feature() throws IOException {
         PFUser user = PFUser.create("test").with("username", "ldavid.gomez");
         PFClient client = PFClient.initialize(API_KEY);
 
