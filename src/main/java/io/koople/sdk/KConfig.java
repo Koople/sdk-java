@@ -1,16 +1,16 @@
-package com.pataflags.sdk;
+package io.koople.sdk;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
-class PFConfig {
+class KConfig {
     String sdkKey;
     String propertiesFile;
     Properties configProps;
 
-    PFConfig(String sdkKey) {
+    KConfig(String sdkKey) {
         this.sdkKey = sdkKey;
         this.propertiesFile = "application.properties";
         this.configProps = new Properties();

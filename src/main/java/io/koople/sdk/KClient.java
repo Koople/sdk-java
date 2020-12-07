@@ -1,33 +1,33 @@
-package com.pataflags.sdk;
+package io.koople.sdk;
 
-import com.pataflags.evaluator.PFEvaluation;
-import com.pataflags.evaluator.PFUser;
+import io.koople.evaluator.PFEvaluation;
+import io.koople.evaluator.PFUser;
 
 import java.io.IOException;
 
 import static kotlin.jvm.internal.Intrinsics.checkNotNull;
 
 
-public class PFClient implements AutoCloseable {
+public class KClient implements AutoCloseable {
 
-    private PFClientService clientService;
+    private KClientService clientService;
     private static final int DEFAULT_POLLING_INTERVAL = 60;
 
-    private PFClient(PFClientService clientService) {
+    private KClient(KClientService clientService) {
         this.clientService = clientService;
     }
 
-    public static PFClient initialize(String apiKey) throws IOException {
+    public static KClient initialize(String apiKey) throws IOException {
         checkNotNull(apiKey, "Sdk key must not be null");
         return initialize(apiKey, DEFAULT_POLLING_INTERVAL);
     }
 
-    public static PFClient initialize(String apiKey, int pollingInterval) throws IOException {
+    public static KClient initialize(String apiKey, int pollingInterval) throws IOException {
         checkNotNull(apiKey, "Sdk key must not be null");
         if(pollingInterval < 10) pollingInterval = 10;
 
-        PFClientService clientService = new PFClientService(apiKey, pollingInterval);
-        return new PFClient(clientService);
+        KClientService clientService = new KClientService(apiKey, pollingInterval);
+        return new KClient(clientService);
     }
 
     public PFEvaluation evaluate(PFUser user) {

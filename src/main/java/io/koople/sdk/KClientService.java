@@ -1,27 +1,27 @@
-package com.pataflags.sdk;
+package io.koople.sdk;
 
-import com.pataflags.evaluator.*;
-import com.pataflags.evaluator.stores.PFInMemoryStore;
+import io.koople.evaluator.*;
+import io.koople.evaluator.stores.PFInMemoryStore;
 
 import java.io.IOException;
 import java.util.Optional;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PFClientService {
+public class KClientService {
 
     private PFStore store;
     private final String apiKey;
     private final int pollingInterval;
-    private final PFHttpClient httpClient;
-    private final PFConfig config;
+    private final KHttpClient httpClient;
+    private final KConfig config;
 
 
-    public PFClientService(String apiKey, int pollingInterval) throws IOException {
+    public KClientService(String apiKey, int pollingInterval) throws IOException {
         this.apiKey = apiKey;
         this.pollingInterval = pollingInterval * 1000;
-        this.config = new PFConfig(apiKey);
-        this.httpClient = new PFHttpClient();
+        this.config = new KConfig(apiKey);
+        this.httpClient = new KHttpClient();
 
         FetchStore();
         setIntervalTask();

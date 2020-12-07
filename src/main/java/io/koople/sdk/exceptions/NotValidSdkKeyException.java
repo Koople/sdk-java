@@ -1,4 +1,4 @@
-package com.pataflags.sdk.exceptions;
+package io.koople.sdk.exceptions;
 
 public class NotValidSdkKeyException extends RuntimeException {
     public NotValidSdkKeyException() {

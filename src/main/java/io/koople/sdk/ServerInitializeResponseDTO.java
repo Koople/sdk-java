@@ -1,10 +1,10 @@
-package com.pataflags.sdk;
+package io.koople.sdk;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.pataflags.evaluator.PFFeatureFlag;
-import com.pataflags.evaluator.PFRemoteConfig;
-import com.pataflags.evaluator.PFSegment;
+import io.koople.evaluator.PFFeatureFlag;
+import io.koople.evaluator.PFRemoteConfig;
+import io.koople.evaluator.PFSegment;
 
 import java.util.List;
 
