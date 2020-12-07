@@ -23,7 +23,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_throws_exception_when_sdk_key_is_null() {
-        try (KClient pfClient = KClient.initialize(null)) {
+        try (KClient ignored = KClient.initialize(null)) {
             fail("expected null pointer exception");
         } catch (NullPointerException e) {
             assertEquals("Sdk key must not be null", e.getMessage());
@@ -43,7 +43,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_throw_IOException_when_init_with_invalid_key() {
-        KConfig config =  new KConfig("invalid_key");
+        new KConfig("invalid_key");
         try {
             KClient.initialize("invalid_key");
             EasyMock.expectLastCall().andThrow(new IOException());
