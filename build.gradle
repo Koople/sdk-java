@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'io.koople'
-version '0.0.4-SNAPSHOT'
+version '0.0.5'
 
 sourceCompatibility = 1.8
 
@@ -17,7 +17,7 @@ repositories {
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            artifactId = 'koople-sdk-java'
+            artifactId = 'server-sdk-java'
             from components.java
         }
     }

@@ -4,13 +4,97 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>io.koople</groupId>
+    <artifactId>server-sdk-java</artifactId>
+    <version>0.5.0</version>
+    <packaging>jar</packaging>
+
+    <name>Koople Java SDK</name>
+    <description>Koople Java SDK</description>
+    <url>https://koople.io</url>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <groupId>io.koople.sdk</groupId>
-    <artifactId>server-sdk</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <name>David Gomez</name>
+            <email>david.gomez@koople.io</email>
+            <organization>Koople.io</organization>
+            <organizationUrl>https://koople.io</organizationUrl>
+        </developer>
+        <developer>
+            <name>David Serrano</name>
+            <email>david.serrano@koople.io</email>
+            <organization>Koople.io</organization>
+            <organizationUrl>https://koople.io</organizationUrl>
+        </developer>
+        <developer>
+            <name>Oscar Galindo</name>
+            <email>oscar.galindo@koople.io</email>
+            <organization>Koople.io</organization>
+            <organizationUrl>https://koople.io</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:git://github.com/Koople/sdk-java.git</connection>
+        <developerConnection>scm:git:ssh://github.com:Koople/sdk-java.git</developerConnection>
+        <url>https://github.com/Koople/sdk-java/tree/master</url>
+    </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.1-jre</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+            <version>2.9.8</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.koople</groupId>
+            <artifactId>fflags-evaluator</artifactId>
+            <version>0.0.5</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/evaluator/fflags-evaluator-0.0.5.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>4.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
