@@ -22,10 +22,10 @@ class KConfig {
     }
 
     URL init() throws MalformedURLException {
-        String protocol = this.configProps.getProperty("fflags.server.protocol");
-        String host = this.configProps.getProperty("fflags.server.host");
-        int port = Integer.parseInt(this.configProps.getProperty("fflags.server.port"));
-        String initURL = this.configProps.getProperty("fflags.server.endpoint");
+        String protocol = this.configProps.getProperty("koople.server.protocol");
+        String host = this.configProps.getProperty("koople.server.host");
+        int port = Integer.parseInt(this.configProps.getProperty("koople.server.port"));
+        String initURL = this.configProps.getProperty("koople.server.endpoint");
 
         return new URL(protocol, host, port, initURL);
     }
