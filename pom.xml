@@ -30,19 +30,19 @@
         <developer>
             <name>David Gomez</name>
             <email>david.gomez@koople.io</email>
-            <organization>Koople.io</organization>
+            <organization>Koople</organization>
             <organizationUrl>https://koople.io</organizationUrl>
         </developer>
         <developer>
             <name>David Serrano</name>
             <email>david.serrano@koople.io</email>
-            <organization>Koople.io</organization>
+            <organization>Koople</organization>
             <organizationUrl>https://koople.io</organizationUrl>
         </developer>
         <developer>
             <name>Oscar Galindo</name>
             <email>oscar.galindo@koople.io</email>
-            <organization>Koople.io</organization>
+            <organization>Koople</organization>
             <organizationUrl>https://koople.io</organizationUrl>
         </developer>
     </developers>
@@ -66,28 +66,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.1</version>
-                <configuration>
-                    <groupId>io.koople</groupId>
-                    <artifactId>fflags-evaluator</artifactId>
-                    <version>0.0.5</version>
-                    <packaging>jar</packaging>
-                    <file>${basedir}/evaluator/fflags-evaluator-0.0.5.jar</file>
-                    <generatePom>true</generatePom>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>install-jar-lib</id>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                        <phase>validate</phase>
-                    </execution>
-                </executions>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -189,10 +167,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.koople</groupId>
-            <artifactId>fflags-evaluator</artifactId>
-            <version>0.0.5</version>
-            <scope>compile</scope>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.5</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
