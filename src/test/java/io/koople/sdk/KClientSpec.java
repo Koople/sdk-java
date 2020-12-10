@@ -1,8 +1,8 @@
 package io.koople.sdk;
 
-import io.koople.evaluator.PFEvaluation;
-import io.koople.evaluator.PFUser;
-import io.koople.evaluator.PFUserAttribute;
+import io.koople.evaluator.KEvaluation;
+import io.koople.evaluator.KUser;
+import io.koople.evaluator.KUserAttribute;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRunner;
 import org.easymock.EasyMockSupport;
@@ -34,8 +34,8 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_return_a_validate_client_when_key_is_not_null() {
-        try (KClient pfClient = KClient.initialize(API_KEY)) {
-            assertNotNull(pfClient);
+        try (KClient client = KClient.initialize(API_KEY)) {
+            assertNotNull(client);
         } catch (NullPointerException | IOException e) {
             fail("expected new client");
         }
@@ -55,10 +55,10 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate() throws IOException {
-        PFUser user = PFUser.create("test.user").with("username", "test user");
+        KUser user = KUser.create("test.user").with("username", "test user");
         KClient client = KClient.initialize(API_KEY);
 
-        PFEvaluation evaluation = client.evaluate(user);
+        KEvaluation evaluation = client.evaluate(user);
         assertEquals(evaluation.features, new HashMap<String, Boolean>() {{
             put("developer", true);
             put("developer-enabled", true);
@@ -69,7 +69,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_is_enabled() throws IOException {
-        PFUser user = PFUser.create("test.user").with("username", "test user");
+        KUser user = KUser.create("test.user").with("username", "test user");
         KClient client = KClient.initialize(API_KEY);
 
         Boolean isEnabled = client.isEnabled("developer", user);
@@ -78,10 +78,10 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_is_enabled_attribute_list() throws IOException {
-        ArrayList<PFUserAttribute> attributes = new ArrayList<PFUserAttribute>() {{
-            add(new PFUserAttribute("username", "test user"));
+        ArrayList<KUserAttribute> attributes = new ArrayList<KUserAttribute>() {{
+            add(new KUserAttribute("username", "test user"));
         }};
-        PFUser user = PFUser.create("test.user", attributes);
+        KUser user = KUser.create("test.user", attributes);
         KClient client = KClient.initialize(API_KEY);
 
         Boolean isEnabled = client.isEnabled("developer", user);
@@ -90,7 +90,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_is_not_enabled_for_non_existing_feature() throws IOException {
-        PFUser user = PFUser.create("test.user").with("username", "test user");
+        KUser user = KUser.create("test.user").with("username", "test user");
         KClient client = KClient.initialize(API_KEY);
 
         Boolean isEnabled = client.isEnabled("non_valid_feature", user);
@@ -107,7 +107,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_value_of_non_existing_config_with_anonymous_user_and_default_value() throws IOException {
-        PFUser user = PFUser.anonymous();
+        KUser user = KUser.anonymous();
         KClient client = KClient.initialize(API_KEY);
 
         String remoteConfig = client.valueOf("non-existing-remote-config", user, "default_value");
@@ -116,7 +116,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_value_of_non_existing_config_with_anonymous_user_and_no_default_value() throws IOException {
-        PFUser user = PFUser.anonymous();
+        KUser user = KUser.anonymous();
         KClient client = KClient.initialize(API_KEY);
 
         String remoteConfig = client.valueOf("non-existing-remote-config", user);
@@ -141,7 +141,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_value_of_with_anonymous_user_and_default_value() throws IOException {
-        PFUser user = PFUser.anonymous();
+        KUser user = KUser.anonymous();
         KClient client = KClient.initialize(API_KEY);
 
         String remoteConfig = client.valueOf("remote-config", user, "default_value");
@@ -150,7 +150,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_value_of_with_anonymous_user_and_no_default_value() throws IOException {
-        PFUser user = PFUser.anonymous();
+        KUser user = KUser.anonymous();
         KClient client = KClient.initialize(API_KEY);
 
         String remoteConfig = client.valueOf("remote-config", user);
@@ -175,7 +175,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_value_of_with_specific_user_and_no_default_value() throws IOException {
-        PFUser user = PFUser.create("test.user").with("username", "test user");
+        KUser user = KUser.create("test.user").with("username", "test user");
         KClient client = KClient.initialize(API_KEY);
 
         String remoteConfig = client.valueOf("remote-config-for-user", user);
@@ -184,7 +184,7 @@ public class KClientSpec extends EasyMockSupport {
 
     @Test
     public void should_evaluate_value_of_with_specific_user_and_default_value() throws IOException {
-        PFUser user = PFUser.create("test.user").with("username", "non_valid_user");
+        KUser user = KUser.create("test.user").with("username", "non_valid_user");
         KClient client = KClient.initialize(API_KEY);
 
         String remoteConfig = client.valueOf("remote-config-for-user", user);

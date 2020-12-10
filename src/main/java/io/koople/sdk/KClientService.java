@@ -1,7 +1,7 @@
 package io.koople.sdk;
 
 import io.koople.evaluator.*;
-import io.koople.evaluator.stores.PFInMemoryStore;
+import io.koople.evaluator.stores.KInMemoryStore;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -10,7 +10,7 @@ import java.util.TimerTask;
 
 public class KClientService {
 
-    private PFStore store;
+    private KStore store;
     private final String apiKey;
     private final int pollingInterval;
     private final KHttpClient httpClient;
@@ -45,24 +45,24 @@ public class KClientService {
 
     private void FetchStore() throws IOException {
         ServerInitializeResponseDTO dto = httpClient.get(config.init(), apiKey);
-        this.store = new PFInMemoryStore(dto.features, dto.remoteConfigs, dto.segments);
+        this.store = new KInMemoryStore(dto.features, dto.remoteConfigs, dto.segments);
     }
 
-    public PFEvaluation evaluate(PFUser user) {
-        return new PFEvaluator(this.store).evaluate(user);
+    public KEvaluation evaluate(KUser user) {
+        return new KEvaluator(this.store).evaluate(user);
     }
 
-    public Boolean IsEnabled(String feature, PFUser user) {
-        Optional<PFFeatureFlag> featureFlag = this.store.getAllFeaturesFlags().stream().filter(x -> x.key.equals(feature)).findFirst();
-        //PFFeatureFlag featureFlag = this.store.findFeatureFlagByKey(feature);
+    public Boolean IsEnabled(String feature, KUser user) {
+        Optional<KFeatureFlag> featureFlag = this.store.getAllFeaturesFlags().stream().filter(x -> x.key.equals(feature)).findFirst();
+        //KFeatureFlag featureFlag = this.store.findFeatureFlagByKey(feature);
 
         return featureFlag
-                .map(pfFeatureFlag -> pfFeatureFlag.evaluate(this.store, user))
+                .map(kFeatureFlag -> kFeatureFlag.evaluate(this.store, user))
                 .orElse(false);
 
     }
 
-    public String valueOf(String remoteConfig, PFUser user, String defaultValue) {
-        return new PFEvaluator(this.store).valueOf(remoteConfig, user, defaultValue);
+    public String valueOf(String remoteConfig, KUser user, String defaultValue) {
+        return new KEvaluator(this.store).valueOf(remoteConfig, user, defaultValue);
     }
 }

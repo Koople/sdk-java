@@ -1,7 +1,7 @@
 package io.koople.sdk;
 
-import io.koople.evaluator.PFEvaluation;
-import io.koople.evaluator.PFUser;
+import io.koople.evaluator.KEvaluation;
+import io.koople.evaluator.KUser;
 
 import java.io.IOException;
 
@@ -30,31 +30,31 @@ public class KClient implements AutoCloseable {
         return new KClient(clientService);
     }
 
-    public PFEvaluation evaluate(PFUser user) {
+    public KEvaluation evaluate(KUser user) {
         return clientService.evaluate(user);
     }
 
-    public Boolean isEnabled(String feature, PFUser user) {
+    public Boolean isEnabled(String feature, KUser user) {
         return clientService.IsEnabled(feature, user);
     }
 
     public Boolean isEnabled(String feature) {
-        return clientService.IsEnabled(feature, PFUser.anonymous());
+        return clientService.IsEnabled(feature, KUser.anonymous());
     }
 
     public String valueOf(String remoteConfig) {
-        return clientService.valueOf(remoteConfig, PFUser.anonymous(), "");
+        return clientService.valueOf(remoteConfig, KUser.anonymous(), "");
     }
 
-    public String valueOf(String remoteConfig, PFUser user) {
+    public String valueOf(String remoteConfig, KUser user) {
         return valueOf(remoteConfig, user, "");
     }
 
     public String valueOf(String remoteConfig, String defaultValue) {
-        return clientService.valueOf(remoteConfig, PFUser.anonymous(), defaultValue);
+        return clientService.valueOf(remoteConfig, KUser.anonymous(), defaultValue);
     }
 
-    public String valueOf(String remoteConfig, PFUser user, String defaultValue) {
+    public String valueOf(String remoteConfig, KUser user, String defaultValue) {
         return clientService.valueOf(remoteConfig, user, defaultValue);
     }
 

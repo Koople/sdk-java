@@ -2,19 +2,19 @@ package io.koople.sdk;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.koople.evaluator.PFFeatureFlag;
-import io.koople.evaluator.PFRemoteConfig;
-import io.koople.evaluator.PFSegment;
+import io.koople.evaluator.KFeatureFlag;
+import io.koople.evaluator.KRemoteConfig;
+import io.koople.evaluator.KSegment;
 
 import java.util.List;
 
 public class ServerInitializeResponseDTO {
-    final List<PFFeatureFlag> features;
-    final List<PFRemoteConfig> remoteConfigs;
-    final List<PFSegment> segments;
+    final List<KFeatureFlag> features;
+    final List<KRemoteConfig> remoteConfigs;
+    final List<KSegment> segments;
 
     @JsonCreator
-    public ServerInitializeResponseDTO(@JsonProperty("features") List<PFFeatureFlag> features,@JsonProperty("remoteConfigs") List<PFRemoteConfig> remoteConfigs, @JsonProperty("segments") List<PFSegment> segments) {
+    public ServerInitializeResponseDTO(@JsonProperty("features") List<KFeatureFlag> features, @JsonProperty("remoteConfigs") List<KRemoteConfig> remoteConfigs, @JsonProperty("segments") List<KSegment> segments) {
         this.features = features;
         this.remoteConfigs = remoteConfigs;
         this.segments = segments;
