@@ -34,11 +34,11 @@ public class KClient implements AutoCloseable {
         return clientService.evaluate(user);
     }
 
-    public Boolean isEnabled(String feature, KUser user) {
+    public boolean isEnabled(String feature, KUser user) {
         return clientService.IsEnabled(feature, user);
     }
 
-    public Boolean isEnabled(String feature) {
+    public boolean isEnabled(String feature) {
         return clientService.IsEnabled(feature, KUser.anonymous());
     }
 
