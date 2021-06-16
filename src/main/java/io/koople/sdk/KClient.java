@@ -1,7 +1,7 @@
 package io.koople.sdk;
 
-import io.koople.evaluator.KEvaluation;
-import io.koople.evaluator.KUser;
+import io.koople.sdk.evaluator.KEvaluation;
+import io.koople.sdk.evaluator.KUser;
 
 import java.io.IOException;
 

@@ -1,8 +1,8 @@
 package io.koople.sdk;
 
-import io.koople.evaluator.KEvaluation;
-import io.koople.evaluator.KUser;
-import io.koople.evaluator.KUserAttribute;
+import io.koople.sdk.evaluator.KEvaluation;
+import io.koople.sdk.evaluator.KUser;
+import io.koople.sdk.evaluator.KUserAttribute;
 import org.easymock.EasyMock;
 import org.easymock.EasyMockRunner;
 import org.easymock.EasyMockSupport;

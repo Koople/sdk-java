@@ -1,7 +1,7 @@
 package io.koople.sdk;
 
-import io.koople.evaluator.*;
-import io.koople.evaluator.stores.KInMemoryStore;
+import io.koople.sdk.evaluator.*;
+import io.koople.sdk.evaluator.stores.KInMemoryStore;
 
 import java.io.IOException;
 import java.util.Optional;

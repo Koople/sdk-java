@@ -2,9 +2,9 @@ package io.koople.sdk;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.koople.evaluator.KFeatureFlag;
-import io.koople.evaluator.KRemoteConfig;
-import io.koople.evaluator.KSegment;
+import io.koople.sdk.evaluator.KFeatureFlag;
+import io.koople.sdk.evaluator.KRemoteConfig;
+import io.koople.sdk.evaluator.KSegment;
 
 import java.util.List;
 
