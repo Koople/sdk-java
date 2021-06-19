@@ -28,7 +28,7 @@ dependencies {
     testCompile "org.easymock:easymock:4.1"
 
     compile "com.google.guava:guava:28.1-jre"
-    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.8"
+    compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.12.3"
     compile group: 'commons-codec', name: 'commons-codec', version: '1.5'
 }
 
