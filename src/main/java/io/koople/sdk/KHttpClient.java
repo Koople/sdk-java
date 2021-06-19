@@ -29,7 +29,6 @@ public class KHttpClient {
         con.setRequestProperty("x-api-key", apiKey);
 
         try {
-            System.out.println(con.getURL());
             con.getResponseCode();
         } catch (Throwable ex) {
             System.out.println(ex.getMessage());
